@@ -21,16 +21,23 @@ public class UserController {
         return "/UserList";
     }
 
-    @GetMapping("/cadastro")
-    public String cadastro(ModelMap model) {
-        model.addAttribute("user", new User());
-        return "/UserAdd";
-    }
-
     @PostMapping("/salvar")
     public String save(@ModelAttribute("user") User user, ModelMap model) {
         dao.salvar(user);
         return "redirect:/";
     }
 
+    @GetMapping("/update/{id}")
+    public String preUpdate(@PathVariable("id") Long id, ModelMap model) {
+        User user = dao.getId(id);
+        model.addAttribute("user", user);
+        model.addAttribute("action", "update");
+        return "/UserAdd";
+    }
+
+    @PostMapping("/update")
+    public String Update(@ModelAttribute("user") User user, ModelMap model) {
+        dao.editar(user);
+        return "redirect:/";
+    }
 }

@@ -12,7 +12,9 @@
         <a class="btn btn-primary" th:href="@{/}">Home</a>
     </div>
     <div>
-        <form action="#" th:action="@{/salvar}" th:object="${user}" method="post">
+        <h1 th:text="${ac}">...</h1>
+        <form action="#" th:action="@{/}+${action}" th:object="${user}" method="post">
+            <input type="hidden" th:field="*{id}">
             <div class="form-group">
                 <label for="name">Nome: </label>
                 <input name="name" th:field="*{nome}" class="form-control"/>

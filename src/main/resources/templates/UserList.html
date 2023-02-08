@@ -45,6 +45,7 @@
             <tr>
                 <th>ID</th>
                 <th>NOME</th>
+                <th>ACAO</th>
             </tr>
         </thead>
         <tbody>
@@ -54,6 +55,9 @@
                     <td>
                         <span th:text="${user.nome}"></span>
                         <span th:text="${user.sobrenome}"></span>
+                    </td>
+                    <td>
+                        <a class="btn btn-info" th:href="@{update/{id}(id=${user.id})}" >Editar</a>
                     </td>
                 </tr>
             </th:block>
