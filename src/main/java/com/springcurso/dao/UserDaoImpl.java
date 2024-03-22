@@ -1,5 +1,6 @@
 package com.springcurso.dao;
 
+import java.time.LocalDate;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,9 +19,9 @@ public class UserDaoImpl implements UserDao{
     private List<User> createUserList() {
         if (userList == null) {
             userList = new LinkedList<>();
-            userList.add(new User(System.currentTimeMillis()+1L, "Ana", "da Silva"));
-            userList.add(new User(System.currentTimeMillis()+2L, "Luiz", "dos Santos"));
-            userList.add(new User(System.currentTimeMillis()+3L, "Mariana", "Mello"));
+            userList.add(new User(System.currentTimeMillis()+1L, "Ana", "da Silva", LocalDate.of(1992,5,10)));
+            userList.add(new User(System.currentTimeMillis()+2L, "Luiz", "dos Santos", LocalDate.of(1990,8,11)));
+            userList.add(new User(System.currentTimeMillis()+3L, "Mariana", "Mello", LocalDate.of(1988,9,17)));
             userList.add(new User(System.currentTimeMillis()+4L, "Caren", "Pereira"));
             userList.add(new User(System.currentTimeMillis()+5L, "Sonia", "Fagundes"));
             userList.add(new User(System.currentTimeMillis()+6L, "Norberto", "de Souza"));
@@ -41,6 +42,7 @@ public class UserDaoImpl implements UserDao{
                 .forEach((u) -> {
                     u.setNome(user.getNome());
                     u.setSobrenome(user.getSobrenome());
+                    u.setDtNascimento(user.getDtNascimento());
                 });
     }
 
@@ -58,6 +60,7 @@ public class UserDaoImpl implements UserDao{
 
     @Override
     public List<User> getTodos() {
+
         return userList;
     }
 }

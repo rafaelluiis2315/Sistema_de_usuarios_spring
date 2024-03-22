@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 
 @Controller
@@ -22,8 +23,9 @@ public class UserController {
     }
 
     @PostMapping("/salvar")
-    public String save(@ModelAttribute("user") User user, ModelMap model) {
+    public String save(@ModelAttribute("user") User user, ModelMap model, RedirectAttributes attr) {
         dao.salvar(user);
+        attr.addFlashAttribute("menssage", "Usuario salvo com sucesso.");
         return "redirect:/";
     }
 
@@ -36,8 +38,16 @@ public class UserController {
     }
 
     @PostMapping("/update")
-    public String Update(@ModelAttribute("user") User user, ModelMap model) {
+    public String Update(@ModelAttribute("user") User user, ModelMap model, RedirectAttributes attr) {
         dao.editar(user);
+        attr.addFlashAttribute("menssage", "Usuario atualizado com sucesso.");
+        return "redirect:/";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String delete(@PathVariable("id") Long id, RedirectAttributes attr){
+        dao.excluir(id);
+        attr.addFlashAttribute("menssage", "Usuario excluido com sucesso.");
         return "redirect:/";
     }
 }
